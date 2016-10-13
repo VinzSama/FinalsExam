@@ -51,7 +51,14 @@ public class VideoTable {
     }
 
     private static Video createVideoFromCursor(Cursor cursor) {
-        // TODO: Implement this method
+        private static Video createVideoFromCursor(Cursor cursor) {
+            Video vid = new Video();
+            vid.setId(cursor.getString(0));
+            vid.setTitle(cursor.getString(1));
+            vid.setDescription(cursor.getString(2));
+            vid.setThumbnailUrl(cursor.getString(3));
+            return vid;
+        }
         return null;
     }
 
@@ -123,7 +130,13 @@ public class VideoTable {
         Cursor cursor = null;
 
         try {
-            // TODO: Implement retrieval of all video items from the database
+            String select = "Select * from " + VideoEntry.TABLE_NAME;
+            cursor=db.rawQuery(select, null);
+            if(cursor.moveToFirst()){
+                do{
+                    Video vid = new Video(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                }while(cursor.moveToNext());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
