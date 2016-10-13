@@ -3,6 +3,7 @@ package com.usjr.finalsexam.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import.android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -89,6 +90,7 @@ public class VideoListAdapter extends BaseAdapter {
 
         ViewHolder(View itemView) {
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            tvTitle.setTextColor(Color.BLUE);
             imgThumbnail = (ImageView) itemView.findViewById(R.id.imgThumbnail);
         }
     }

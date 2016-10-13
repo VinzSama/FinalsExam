@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Google Videos");
 
         ListView listView = (ListView) findViewById(R.id.listView);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
