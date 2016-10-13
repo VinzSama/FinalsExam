@@ -20,7 +20,7 @@ public class PlayVideoFragment extends Fragment {
     private static final String KEY_VID_ID = "VID_ID";
 
     public static PlayVideoFragment newInstance(String videoId) {
-        PlayVideoFragment fragment = new PlayVideoFragment();
+        PlayVideoFragment fragment =  new PlayVideoFragment();
         Bundle args = new Bundle();
         args.putString("VID_ID", videoId);
         fragment.setArguments(args);

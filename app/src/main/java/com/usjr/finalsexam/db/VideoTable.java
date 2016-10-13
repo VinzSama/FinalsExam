@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+import android.widget.Toast;
 
 import com.usjr.finalsexam.entity.Video;
 
@@ -51,14 +52,12 @@ public class VideoTable {
     }
 
     private static Video createVideoFromCursor(Cursor cursor) {
-        private static Video createVideoFromCursor(Cursor cursor) {
-            Video vid = new Video();
-            vid.setId(cursor.getString(0));
-            vid.setTitle(cursor.getString(1));
-            vid.setDescription(cursor.getString(2));
-            vid.setThumbnailUrl(cursor.getString(3));
-            return vid;
-        }
+//        Video vid = new Video();
+//        vid.setId(cursor.getString(0));
+//        vid.setTitle(cursor.getString(1));
+//        vid.setDescription(cursor.getString(2));
+//        vid.setThumbnailUrl(cursor.getString(3));
+//        return vid;
         return null;
     }
 
@@ -126,16 +125,25 @@ public class VideoTable {
 
     public static List<Video> getAllVideos(Context context) {
         List<Video> videos = new ArrayList<>();
-        SQLiteDatabase db = null;
+
+        SQLiteDatabase db = DbHandler.getInstance(context).getReadableDatabase();
         Cursor cursor = null;
 
         try {
-            String select = "Select * from " + VideoEntry.TABLE_NAME;
-            cursor=db.rawQuery(select, null);
+            cursor = db.rawQuery(SELECT_QUERY, null);
+
             if(cursor.moveToFirst()){
+
                 do{
-                    Video vid = new Video(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                    String id = cursor.getString(cursor.getColumnIndex(VideoEntry._ID));
+                    String title = cursor.getString(cursor.getColumnIndex(VideoEntry.COL_TITLE));
+                    String desc = cursor.getString(cursor.getColumnIndex(VideoEntry.COL_DESCRIPTION));
+                    String thumbnail = cursor.getString(cursor.getColumnIndex(VideoEntry.COL_THUMBNAIL_URL));
+                    Video video = new Video(id, title,desc,thumbnail);
+                    videos.add(video);
+
                 }while(cursor.moveToNext());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
